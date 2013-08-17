@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<executable>
+  <category>Surface Models</category>
+  <title>SurfaceReconstruction</title>
+  <description><![CDATA[Surface reconstruction from point sets files ]]></description>
+  <version>$Revision$</version>
+  <documentation-url>http://www.slicer.org/slicerWiki/index.php/Documentation/4.2/Modules/SurfaceReconstruction</documentation-url>
+  <license>Slicer</license>
+  <contributor>David Doria, ArnaudGelas, Julien Jomier (Kitware), Stephen Aylward (Kitware), Jean-Christophe Fillion-Robin (Kitware)</contributor>
+  <acknowledgements>This work was partially funded by NIH grant 3P41RR013218-12S1</acknowledgements>
+  <parameters>
+    <label>IO</label>
+    <description><![CDATA[Input/output parameters]]></description>
+    
+     <geometry>
+      <name>inputFile</name>
+      <label>Input Point Sets</label>
+      <channel>input</channel>
+      <index>0</index>
+      <description>Input Point Sets</description>
+     </geometry>
+    
+     <geometry>
+      <name>outputFile</name>
+      <label>Output Surface</label>
+      <channel>output</channel>
+      <index>1</index>
+      <description>Output Surface</description>
+     </geometry>
+ 
+  </parameters>
+  
+  <parameters>
+    <label>Surface Reconstruction Parameters</label>
+    <description>Parameters used for Surface Reconstruction.</description>
+    <integer>
+      <name>depth</name>
+      <label>Depth</label>
+      <flag>-i</flag>
+      <longflag>--iteration</longflag>
+      <description>the Maximum depth of the tree</description>
+      <default>8</default>
+      <constraints>
+        <minimum>0</minimum>
+      </constraints>
+    </integer>
+  
+  </parameters>
+  
+    
+    
+</executable>
