@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <executable>
   <category>Surface Models</category>
-  <title>SurfaceReconstruction</title>
+  <title>Surface Reconstruction</title>
   <description><![CDATA[Surface reconstruction from point sets files ]]></description>
   <version>$Revision$</version>
   <documentation-url>http://www.slicer.org/slicerWiki/index.php/Documentation/4.2/Modules/SurfaceReconstruction</documentation-url>
@@ -12,20 +12,29 @@
     <label>IO</label>
     <description><![CDATA[Input/output parameters]]></description>
     
-     <geometry>
-      <name>inputFile</name>
-      <label>Input Point Sets</label>
+     <image>
+      <name>inputVolume</name>
+      <label>Input Volume</label>
       <channel>input</channel>
       <index>0</index>
-      <description>Input Point Sets</description>
-     </geometry>
+      <description><![CDATA[Input volume]]></description>
+    </image>
+    
     
      <geometry>
       <name>outputFile</name>
-      <label>Output Surface</label>
+      <label>Output Polydata</label>
       <channel>output</channel>
       <index>1</index>
-      <description>Output Surface</description>
+      <description><![CDATA[Output Polydata]]></description>
+     </geometry>
+    
+    <geometry>
+      <name>outputSurfaceFile</name>
+      <label>Output Surface</label>
+      <channel>output</channel>
+      <index>2</index>
+      <description><![CDATA[Output Surface]]></description>
      </geometry>
  
   </parameters>
@@ -37,14 +46,16 @@
       <name>depth</name>
       <label>Depth</label>
       <flag>-i</flag>
-      <longflag>--iteration</longflag>
+      <longflag>--depth</longflag>
       <description>the Maximum depth of the tree</description>
       <default>8</default>
       <constraints>
-        <minimum>0</minimum>
-      </constraints>
+        <minimum>6</minimum>
+        <maximum>12</maximum>
+       </constraints>
     </integer>
-  
+    
+ 
   </parameters>
   
     
