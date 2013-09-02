@@ -67,18 +67,18 @@ int DoIt( int argc, char * argv[], T )
 //Extract points at boundary  
   
 //Get Spacing, size and origin of input image
-  const  InputImageType::SpacingType& inputSpacing =
+  const typename InputImageType::SpacingType& inputSpacing =
     reader->GetOutput()->GetSpacing();
-  const  InputImageType::RegionType& inputRegion =
+  const typename InputImageType::RegionType& inputRegion =
      reader->GetOutput()->GetLargestPossibleRegion();
-  const  InputImageType::SizeType& inputSize =
+  const typename InputImageType::SizeType& inputSize =
     inputRegion.GetSize();
-  const  InputImageType::PointType& inOrigin=
+  const typename InputImageType::PointType& inOrigin=
   	 reader->GetOutput()->GetOrigin();
 
 
 //Get points at boundary  	
-   InputImageType::IndexType index;
+ typename  InputImageType::IndexType index;
   
   vtkSmartPointer<vtkPoints> pointsInit = vtkSmartPointer<vtkPoints>::New();
 
