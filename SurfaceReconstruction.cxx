@@ -29,6 +29,7 @@
 #include <vtkPointSource.h>
 #include <vtkPolyDataNormals.h>
 #include <vtkVertexGlyphFilter.h>
+#include <vtkMath.h>
 
 #include <vtkXMLPolyDataReader.h>
 #include <vtkXMLPolyDataWriter.h>
@@ -197,8 +198,13 @@ int DoIt( int argc, char * argv[], T )
 
 	vtkSmartPointer<vtkPoints> pointsInit = vtkSmartPointer<vtkPoints>::New();
 	
- 	float pointX,pointY,pointZ;
 
+	float pointXYZ[3];
+	const float matrixVTK2Slicer [3][3]={{-1, 0, 0}, {0,-1, 0}, {0, 0,1}};
+	float pointXYZ_S[3];
+
+    MidImageType::PointType contourPoint;
+	
 	for(unsigned int k=0; k<outputSize[2]; k++)
 	{
 		for(unsigned int j=0; j<outputSize[1]; j++)
@@ -210,10 +216,16 @@ int DoIt( int argc, char * argv[], T )
 				index[2]=k;
 				if ( outContour->GetPixel(index)!=0)
 				{
-					pointZ= outOrigin[2]+k*outputSpacing[2];
-					pointY= outOrigin[1]+j*outputSpacing[1];					 	
-					pointX= outOrigin[0]+i*outputSpacing[0];
-				    pointsInit->InsertNextPoint(pointX, pointY, pointZ);
+                    outContour->TransformIndexToPhysicalPoint(index,contourPoint);
+					pointXYZ[2]=contourPoint[2];
+					pointXYZ[1]=contourPoint[1];
+					pointXYZ[0]=contourPoint[0];
+
+					//transform a point to Slicer space
+					vtkMath::Multiply3x3(matrixVTK2Slicer,pointXYZ,pointXYZ_S);
+
+					pointsInit->InsertNextPoint(pointXYZ_S);
+
 				}
 				
 			}
@@ -292,6 +304,10 @@ int DoIt( int argc, char * argv[], T )
 	//PoissonReconstruction
 	vtkSmartPointer<vtkPoissonReconstruction> poissonFilter = vtkSmartPointer<vtkPoissonReconstruction>::New();
 	poissonFilter->SetDepth( depth );
+	poissonFilter->SetScale(scale);
+	poissonFilter->SetSolverDivide(solverDivide);
+	poissonFilter->SetIsoDivide(isoDivide);
+	poissonFilter->SetSamplesPerNode(samplesPerNode);
 	poissonFilter->SetInputConnection(readerPoly->GetOutputPort());
 	poissonFilter->Update();
 

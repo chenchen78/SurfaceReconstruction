@@ -45,16 +45,63 @@
     <integer>
       <name>depth</name>
       <label>Depth</label>
-      <flag>-i</flag>
+      <flag>-d</flag>
       <longflag>--depth</longflag>
       <description>the Maximum depth of the tree</description>
       <default>8</default>
       <constraints>
-        <minimum>6</minimum>
-        <maximum>12</maximum>
+        <minimum>4</minimum>
+        <maximum>20</maximum>
        </constraints>
     </integer>
-    
+	
+	<float>
+      <name>scale</name>
+      <label>Scale</label>
+      <flag>-s</flag>
+      <longflag>--scale</longflag>
+      <description>the ratio </description>
+      <default>1.25</default>
+      <constraints>
+        <minimum>1.0</minimum>
+        <maximum>3.0</maximum>
+       </constraints>
+    </float>
+	
+	<integer>
+      <name>solverDivide</name>
+      <label>SolverDivide</label>
+      <flag>-v</flag>
+      <longflag>--solverDivide</longflag>
+      <description>Solver subdivision depth</description>
+      <default>8</default>
+    </integer>
+	
+    <integer>
+      <name>isoDivide</name>
+      <label>IsoDivide</label>
+      <flag>-i</flag>
+      <longflag>--isoDivide</longflag>
+      <description>Iso-surface extraction subdivision depth</description>
+      <default>8</default>
+      <constraints>
+        <minimum>4</minimum>
+        <maximum>20</maximum>
+       </constraints>
+    </integer>
+	
+    <float>
+      <name>samplesPerNode</name>
+      <label>SamplesPerNode</label>
+      <flag>-n</flag>
+      <longflag>--SamplesPerNode</longflag>
+      <description>Minimum number of samples </description>
+      <default>1.0</default>
+      <constraints>
+        <minimum>1.0</minimum>
+        <maximum>20.0</maximum>
+       </constraints>
+    </float>
  
   </parameters>
   
